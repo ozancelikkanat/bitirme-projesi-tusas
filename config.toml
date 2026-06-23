@@ -1,0 +1,58 @@
+"""Shared risk-label normalization and presentation helpers."""
+
+from __future__ import annotations
+
+import pandas as pd
+
+
+RISK_ORDER = ["LOW", "MEDIUM", "HIGH", "CRITICAL", "INCOMPLETE"]
+
+RISK_CELL_COLORS = {
+    "CRITICAL": "background-color: #fde2e2; color: #7f1d1d;",
+    "HIGH": "background-color: #ffedd5; color: #7c2d12;",
+    "MEDIUM": "background-color: #fff3bf; color: #713f12;",
+    "LOW": "background-color: #dcfce7; color: #14532d;",
+    "INCOMPLETE": "background-color: #e5e7eb; color: #374151;",
+}
+
+RISK_PLOT_COLORS = {
+    "LOW": "#2e7d32",
+    "MEDIUM": "#f9a825",
+    "HIGH": "#f97316",
+    "CRITICAL": "#c62828",
+    "INCOMPLETE": "#757575",
+    "Low": "#2e7d32",
+    "Medium": "#f9a825",
+    "High": "#f97316",
+    "Incomplete": "#757575",
+}
+
+RISK_LABELS = {
+    "LOW": "Düşük",
+    "MEDIUM": "Orta",
+    "HIGH": "Yüksek",
+    "CRITICAL": "Kritik",
+    "INCOMPLETE": "Hesap dışı",
+    "Low": "Düşük",
+    "Medium": "Orta",
+    "High": "Yüksek",
+    "Incomplete": "Hesap dışı",
+    "All": "Tümü",
+}
+
+
+def normalize_risk_label(value: object) -> str:
+    """Normalize display risk labels while keeping HIGH separate from CRITICAL."""
+
+    if pd.isna(value):
+        return "INCOMPLETE"
+    text = str(value).strip().upper()
+    if text in {"CRITICAL", "KRİTİK", "KRITIK"}:
+        return "CRITICAL"
+    if text in {"HIGH", "YÜKSEK"}:
+        return "HIGH"
+    if text in {"MEDIUM", "ORTA"}:
+        return "MEDIUM"
+    if text in {"LOW", "DÜŞÜK", "DUSUK"}:
+        return "LOW"
+    return "INCOMPLETE"

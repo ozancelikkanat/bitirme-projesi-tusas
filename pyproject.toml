@@ -1,0 +1,30 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+.env
+.env.*
+.streamlit/secrets.toml
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Gerçek/proje verileri ve üretilen çıktılar repoya eklenmez.
+data/private/
+data/raw/
+outputs/
+*.xlsx
+*.xls
+*.ods
+*.pptx
+*.docx
+*.pdf
+
+# Yalnızca anonim örnek CSV dosyası takip edilir.
+!data/sample_wrinkle_data.csv
